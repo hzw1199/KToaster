@@ -2,21 +2,20 @@ apply plugin: 'com.android.application'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.hjq.toast.demo"
-        minSdkVersion 16
-        targetSdkVersion 33
+        minSdk 19
+        targetSdk 33
         versionCode 1206
         versionName "12.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    // 使用 JDK 1.8
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
 
     // Apk 签名的那些事：https://www.jianshu.com/p/a1f8e5896aa2

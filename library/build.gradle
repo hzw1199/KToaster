@@ -2,16 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
-    compileSdkVersion 33
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 14
+        minSdk 14
     }
 
-    // 使用 JDK 1.8
     compileOptions {
-        targetCompatibility JavaVersion.VERSION_1_8
-        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility JavaVersion.VERSION_17
     }
     packagingOptions {
         jniLibs {

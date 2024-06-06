@@ -1,75 +1,41 @@
-package com.hjq.toast.style;
+package com.hjq.toast.style
 
-import android.content.Context;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import com.hjq.toast.config.IToastStyle;
+import android.content.Context
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.View
+import com.hjq.toast.config.IToastStyle
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/Toaster
- *    time   : 2021/03/09
- *    desc   : Toast 自定义 View 包装样式实现
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/Toaster
+ * time   : 2021/03/09
+ * desc   : Toast 自定义 View 包装样式实现
  */
-public class CustomToastStyle implements IToastStyle<View> {
-
-    private final int mLayoutId;
-    private final int mGravity;
-    private final int mXOffset;
-    private final int mYOffset;
-    private final float mHorizontalMargin;
-    private final float mVerticalMargin;
-
-    public CustomToastStyle(int id) {
-        this(id, Gravity.CENTER);
+class CustomToastStyle @JvmOverloads constructor(
+    private val mLayoutId: Int,
+    private val mGravity: Int = Gravity.CENTER,
+    private val mXOffset: Int = 0,
+    private val mYOffset: Int = 0,
+    private val mHorizontalMargin: Float = 0f,
+    private val mVerticalMargin: Float = 0f
+) : IToastStyle<View> {
+    override fun createView(context: Context): View {
+        return LayoutInflater.from(context).inflate(mLayoutId, null)
     }
 
-    public CustomToastStyle(int id, int gravity) {
-        this(id, gravity, 0, 0);
-    }
+    override val gravity: Int
+        get() = mGravity
 
-    public CustomToastStyle(int id, int gravity, int xOffset, int yOffset) {
-        this(id, gravity, xOffset, yOffset, 0f, 0f);
-    }
+    override val xOffset: Int
+        get() = mXOffset
 
-    public CustomToastStyle(int id, int gravity, int xOffset, int yOffset, float horizontalMargin, float verticalMargin) {
-        mLayoutId = id;
-        mGravity = gravity;
-        mXOffset = xOffset;
-        mYOffset = yOffset;
-        mHorizontalMargin = horizontalMargin;
-        mVerticalMargin = verticalMargin;
-    }
+    override val yOffset: Int
+        get() = mYOffset
 
-    @Override
-    public View createView(Context context) {
-        return LayoutInflater.from(context).inflate(mLayoutId, null);
-    }
+    override val horizontalMargin: Float
+        get() = mHorizontalMargin
 
-    @Override
-    public int getGravity() {
-        return mGravity;
-    }
-
-    @Override
-    public int getXOffset() {
-        return mXOffset;
-    }
-
-    @Override
-    public int getYOffset() {
-        return mYOffset;
-    }
-
-    @Override
-    public float getHorizontalMargin() {
-        return mHorizontalMargin;
-    }
-
-    @Override
-    public float getVerticalMargin() {
-        return mVerticalMargin;
-    }
+    override val verticalMargin: Float
+        get() = mVerticalMargin
 }

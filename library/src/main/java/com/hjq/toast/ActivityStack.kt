@@ -1,77 +1,71 @@
-package com.hjq.toast;
+package com.hjq.toast
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Application;
-import android.os.Bundle;
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Application
+import android.app.Application.ActivityLifecycleCallbacks
+import android.os.Bundle
+import kotlin.concurrent.Volatile
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/Toaster
- *    time   : 2021/04/07
- *    desc   : Activity 生命周期监控
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/Toaster
+ * time   : 2021/04/07
+ * desc   : Activity 生命周期监控
  */
-final class ActivityStack implements Application.ActivityLifecycleCallbacks {
-
-    @SuppressLint("StaticFieldLeak")
-    private static volatile ActivityStack sInstance;
-
-    public static ActivityStack getInstance() {
-        if(sInstance == null) {
-            synchronized (ActivityStack.class) {
-                if (sInstance == null) {
-                    sInstance = new ActivityStack();
-                }
-            }
-        }
-        return sInstance;
-    }
-
-    /** 私有化构造函数 */
-    private ActivityStack() {}
-
+internal class ActivityStack
+/** 私有化构造函数  */
+private constructor() : ActivityLifecycleCallbacks {
     /**
      * 注册 Activity 生命周期监听
      */
-    public void register(Application application) {
+    fun register(application: Application?) {
         if (application == null) {
-            return;
+            return
         }
-        application.registerActivityLifecycleCallbacks(this);
+        application.registerActivityLifecycleCallbacks(this)
     }
 
-    /** 前台 Activity 对象 */
-    private Activity mForegroundActivity;
+    /** 前台 Activity 对象  */
+    var foregroundActivity: Activity? = null
+        private set
 
-    public Activity getForegroundActivity() {
-        return mForegroundActivity;
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
+
+    override fun onActivityStarted(activity: Activity) {}
+
+    override fun onActivityResumed(activity: Activity) {
+        foregroundActivity = activity
     }
 
-    @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {}
-
-    @Override
-    public void onActivityStarted(Activity activity) {}
-
-    @Override
-    public void onActivityResumed(Activity activity) {
-        mForegroundActivity = activity;
-    }
-
-    @Override
-    public void onActivityPaused(Activity activity) {
-        if (mForegroundActivity != activity) {
-            return;
+    override fun onActivityPaused(activity: Activity) {
+        if (foregroundActivity !== activity) {
+            return
         }
-        mForegroundActivity = null;
+        foregroundActivity = null
     }
 
-    @Override
-    public void onActivityStopped(Activity activity) {}
+    override fun onActivityStopped(activity: Activity) {}
 
-    @Override
-    public void onActivitySaveInstanceState(Activity activity, Bundle outState) {}
+    override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
 
-    @Override
-    public void onActivityDestroyed(Activity activity) {}
+    override fun onActivityDestroyed(activity: Activity) {}
+
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        @Volatile
+        private var sInstance: ActivityStack? = null
+
+        val instance: ActivityStack
+            get() {
+                if (sInstance == null) {
+                    synchronized(ActivityStack::class.java) {
+                        if (sInstance == null) {
+                            sInstance = ActivityStack()
+                        }
+                    }
+                }
+                return sInstance!!
+            }
+    }
 }

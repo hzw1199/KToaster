@@ -5,8 +5,6 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        versionCode 1206
-        versionName "12.6"
     }
 
     // 使用 JDK 1.8
@@ -14,11 +12,16 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
         sourceCompatibility JavaVersion.VERSION_1_8
     }
-
     packagingOptions {
-        // 剔除这个包下的所有文件（不会移除签名信息）
-        exclude 'META-INF/*******'
+        jniLibs {
+            excludes += ['META-INF/*******']
+        }
+        resources {
+            excludes += ['META-INF/*******']
+        }
     }
+
+    namespace 'com.hjq.toast'
 
     android.libraryVariants.all { variant ->
         // aar 输出文件名配置
@@ -44,7 +47,7 @@ tasks.withType(Javadoc) {
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    setArchiveClassifier('sources')
 }
 
 task javadoc(type: Javadoc) {
@@ -53,7 +56,7 @@ task javadoc(type: Javadoc) {
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    setArchiveClassifier('javadoc')
     from javadoc.destinationDir
 }
 

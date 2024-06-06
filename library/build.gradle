@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     compileSdkVersion 33
@@ -22,6 +23,9 @@ android {
     }
 
     namespace 'com.hjq.toast'
+    kotlinOptions {
+        jvmTarget = '17'
+    }
 
     android.libraryVariants.all { variant ->
         // aar 输出文件名配置
@@ -63,4 +67,8 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 artifacts {
     archives javadocJar
     archives sourcesJar
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.1'
 }

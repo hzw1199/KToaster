@@ -20,7 +20,8 @@ import com.hjq.toast.style.LocationToastStyle
 @Suppress("unused")
 object Toaster {
     /** Application 对象  */
-    private var sApplication: Application? = null
+    var sApplication: Application? = null
+        private set
 
     /** Toast 处理策略  */
     private var sToastStrategy: IToastStrategy? = null

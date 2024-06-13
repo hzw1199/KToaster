@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.snackbar.Snackbar;
 import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
@@ -132,16 +134,16 @@ public final class MainActivity extends AppCompatActivity {
     public void advancedGlobalToastStyle(View v) {
         StyleConfig styleConfig = new StyleConfig();
         styleConfig.textColor("#FF0000")
-                .backgroundRadius(32)
+                .backgroundRadius(8F)
                 .backgroundColor("#8000FF00")
                 .gravity(Gravity.BOTTOM)
-                .positionOffsetY(200)
-                .iconSize(80)
-                .padding(32)
-                .minWidth(1000)
-                .fontSize(80)
+                .positionOffsetY(80F)
+                .iconSize(32F)
+                .padding(4F)
+                .minWidth(40F)
+                .fontSize(20F)
                 .fontWeight(900)
-                .lineHeight(100)
+                .lineHeight(20F)
                 .maxLines(3)
         ;
 
@@ -149,7 +151,7 @@ public final class MainActivity extends AppCompatActivity {
 //        params.text = "a\nb\nc\nd";
         params.text = "abcd";
         params.icon = R.mipmap.ic_launcher;
-        params.durationMs = 500;
+        params.durationMs = 2000;
         params.style = new AdvancedToastStyle(styleConfig);
         Toaster.show(params);
     }

@@ -14,6 +14,7 @@
     <string name="demo_switch_to_success_style">切换为成功样式（局部生效）</string>
     <string name="demo_switch_to_error_style">切换为错误样式（局部生效）</string>
     <string name="demo_custom_toast_layout">自定义 Toast 布局（全局生效）</string>
+    <string name="demo_advanced_toast_layout">高级 Toast 布局（全局生效）</string>
     <string name="demo_switch_to_toast_queuing_strategy">切换成 Toast 排队显示策略</string>
     <string name="demo_click_show_three_toast">点我连续显示 3 个 Toast</string>
     <string name="demo_show_toast_in_background_state">在后台状态下显示 Toast</string>

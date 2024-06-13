@@ -26,12 +26,28 @@ open class SystemToast(application: Application?) : Toast(application), IToast {
         mMessageView = findMessageView(view)
     }
 
+    override fun setDurationMs(durationMs: Int?) {
+
+    }
+
+    override fun getDurationMs(): Int? {
+        return null
+    }
+
     override fun setText(text: CharSequence) {
         super.setText(text)
         if (mMessageView == null) {
             return
         }
         mMessageView!!.text = text
+    }
+
+    override fun setIcon(id: Int) {
+
+    }
+
+    override fun setImage(path: String) {
+
     }
 
 }

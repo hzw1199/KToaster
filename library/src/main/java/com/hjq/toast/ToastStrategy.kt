@@ -149,6 +149,9 @@ class ToastStrategy @JvmOverloads constructor(
      * 生成 Toast 等待时间
      */
     protected fun generateToastWaitMillis(params: ToastParams): Int {
+        if (params.durationMs != null) {
+            return params.durationMs!!
+        }
         if (params.duration == Toast.LENGTH_SHORT) {
             return 1000
         } else if (params.duration == Toast.LENGTH_LONG) {
@@ -173,7 +176,9 @@ class ToastStrategy @JvmOverloads constructor(
             // https://github.com/getActivity/Toaster/issues/79
             mToastReference = WeakReference(toast)
             toast.setDuration(mToastParams.duration)
+            toast.setDurationMs(mToastParams.durationMs)
             mToastParams.text?.let { toast.setText(it) }
+            mToastParams.image?.let { toast.setImage(it) } ?: mToastParams.icon?.let { toast.setIcon(it) }
             toast.show()
         }
     }

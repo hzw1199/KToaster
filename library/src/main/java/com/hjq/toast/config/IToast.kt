@@ -1,8 +1,9 @@
 package com.hjq.toast.config
 
-import android.R
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import com.hjq.toast.R
 
 /**
  * author : Android 轮子哥
@@ -29,6 +30,10 @@ interface IToast {
 
     fun setText(text: CharSequence)
 
+    fun setIcon(id: Int)
+
+    fun setImage(path: String)
+
     /**
      * 设置布局
      */
@@ -48,6 +53,10 @@ interface IToast {
      * 获取显示时长
      */
     fun getDuration(): Int
+
+    fun setDurationMs(durationMs: Int?)
+
+    fun getDurationMs(): Int?
 
     /**
      * 设置重心偏移
@@ -90,8 +99,8 @@ interface IToast {
     fun findMessageView(view: View): TextView? {
         if (view is TextView) {
             if (view.getId() == View.NO_ID) {
-                view.setId(R.id.message)
-            } else require(view.getId() == R.id.message) {
+                view.setId(android.R.id.message)
+            } else require(view.getId() == android.R.id.message) {
                 // 必须将 TextView 的 id 值设置成 android.R.id.message
                 // 否则 Android 11 手机上在后台 toast.setText 的时候会出现报错
                 // java.lang.RuntimeException: This Toast was not created with Toast.makeText()
@@ -100,12 +109,23 @@ interface IToast {
             return view
         }
 
-        val messageView = view.findViewById<View>(R.id.message)
+        val messageView = view.findViewById<View>(android.R.id.message)
         if (messageView is TextView) {
             return messageView
         }
 
         // 如果设置的布局没有包含一个 TextView 则抛出异常，必须要包含一个 id 值为 message 的 TextView（xml 代码 android:id="@android:id/message"，java 代码 view.setId(android.R.id.message)）
         throw IllegalArgumentException("You must include a TextView with an ID value of message (xml code: android:id=\"@android:id/message\", java code: view.setId(android.R.id.message))")
+    }
+
+    /**
+     * 获取用于显示图标的 ImageView
+     */
+    fun findIconView(view: View): ImageView? {
+        val iconView = view.findViewById<View>(R.id.iv_icon)
+        if (iconView is ImageView) {
+            return iconView
+        }
+        return null
     }
 }

@@ -16,8 +16,10 @@ import com.hjq.permissions.XXPermissions;
 import com.hjq.toast.ToastParams;
 import com.hjq.toast.ToastStrategy;
 import com.hjq.toast.Toaster;
+import com.hjq.toast.style.AdvancedToastStyle;
 import com.hjq.toast.style.BlackToastStyle;
 import com.hjq.toast.style.CustomToastStyle;
+import com.hjq.toast.style.StyleConfig;
 import com.hjq.toast.style.WhiteToastStyle;
 import com.hjq.window.EasyWindow;
 
@@ -125,6 +127,31 @@ public final class MainActivity extends AppCompatActivity {
         Toaster.setView(R.layout.toast_custom_view);
         Toaster.setGravity(Gravity.CENTER);
         Toaster.show(R.string.demo_custom_toast_layout_result);
+    }
+
+    public void advancedGlobalToastStyle(View v) {
+        StyleConfig styleConfig = new StyleConfig();
+        styleConfig.textColor("#FF0000")
+                .backgroundRadius(32)
+                .backgroundColor("#8000FF00")
+                .gravity(Gravity.BOTTOM)
+                .positionOffsetY(200)
+                .iconSize(80)
+                .padding(32)
+                .minWidth(1000)
+                .fontSize(80)
+                .fontWeight(900)
+                .lineHeight(100)
+                .maxLines(3)
+        ;
+
+        ToastParams params = new ToastParams();
+//        params.text = "a\nb\nc\nd";
+        params.text = "abcd";
+        params.icon = R.mipmap.ic_launcher;
+        params.durationMs = 500;
+        params.style = new AdvancedToastStyle(styleConfig);
+        Toaster.show(params);
     }
 
     public void switchToastStrategy(View v) {

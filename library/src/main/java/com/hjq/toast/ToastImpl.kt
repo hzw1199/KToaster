@@ -153,7 +153,9 @@ internal class ToastImpl private constructor(
                 // 添加一个移除吐司的任务
                 HANDLER.postDelayed(
                     { cancel() },
-                    (if (mToast.getDuration() == Toast.LENGTH_LONG) mToast.longDuration else mToast.shortDuration).toLong()
+                    mToast.getDurationMs()?.toLong() ?: (
+                            (if (mToast.getDuration() == Toast.LENGTH_LONG) mToast.longDuration else mToast.shortDuration).toLong()
+                            )
                 )
                 // 注册生命周期管控
                 mWindowLifecycle!!.register(this@ToastImpl)

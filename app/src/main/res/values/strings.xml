@@ -15,6 +15,7 @@
     <string name="demo_switch_to_success_style">Switch to success style (local effect)</string>
     <string name="demo_switch_to_error_style">Switch to error style (local effect)</string>
     <string name="demo_custom_toast_layout">Custom toast layout (global effect)</string>
+    <string name="demo_advanced_toast_layout">Advanced toast layout (global effect)</string>
     <string name="demo_switch_to_toast_queuing_strategy">Switch to toast queuing display strategy</string>
     <string name="demo_click_show_three_toast">Click and I show 3 toast in a row</string>
     <string name="demo_show_toast_in_background_state">Show toast in background state</string>

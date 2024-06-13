@@ -15,6 +15,14 @@ class ToastParams {
     @JvmField
     var text: CharSequence? = null
 
+    /** 图标  */
+    @JvmField
+    var icon: Int? = null
+
+    /** 图片路径，优先级高于icon  */
+    @JvmField
+    var image: String? = null
+
     /**
      * Toast 显示时长，有两种值可选
      *
@@ -23,6 +31,10 @@ class ToastParams {
      */
     @JvmField
     var duration: Int = -1
+
+    /**  Toast 显示时长，毫秒，优先级高于duration */
+    @JvmField
+    var durationMs: Int? = null
 
     /** 延迟显示时间  */
     @JvmField
